@@ -843,7 +843,8 @@
                 console.error('请求失败:', error);
                 return '🌐 网络连接失败，请检查网络或刷新页面重试。';
             }
-        } async function sendUserMessage() { const input = document.getElementById('qaInput'); const question = input.value.trim(); if (!question) return; appendMessage(question, 'user'); input.value = ''; appendMessage('🤔 思考中...', 'ai', true); try { const answer = await askAI(question); replaceLastAiMessage(answer); } catch (e) { replaceLastAiMessage('✨ 大模型暂时繁忙，请稍后再试～'); } }
+        } 
+        async function sendUserMessage() { const input = document.getElementById('qaInput'); const question = input.value.trim(); if (!question) return; appendMessage(question, 'user'); input.value = ''; appendMessage('🤔 思考中...', 'ai', true); try { const answer = await askAI(question); replaceLastAiMessage(answer); } catch (e) { replaceLastAiMessage('✨ 大模型暂时繁忙，请稍后再试～'); } }
         function appendMessage(text, sender, isTemp = false) { const container = document.getElementById('chatMessages'); const msgDiv = document.createElement('div'); msgDiv.className = `message ${sender}`; if (isTemp) msgDiv.id = 'tempAiMsg'; msgDiv.innerHTML = `<div class="bubble">${text}</div>`; container.appendChild(msgDiv); container.scrollTop = container.scrollHeight; }
         function replaceLastAiMessage(finalText) { const temp = document.getElementById('tempAiMsg'); if (temp) { temp.remove(); } appendMessage(finalText, 'ai'); }
         function clearChat() { document.getElementById('chatMessages').innerHTML = `<div class="message ai"><div class="bubble">✨ 嗨！我是智游择境AI导游，可以问我苏州人文历史、景点攻略、行前建议，比如“平江路有什么故事？”“耦园适合情侣吗？”</div></div>`; }
